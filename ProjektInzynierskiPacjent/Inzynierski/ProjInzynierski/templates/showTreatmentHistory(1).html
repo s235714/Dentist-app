@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Historia zabiegów <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('accountPatient')}}">Powrót do strony głównej</a></b></h1><hr>
+<div style="background-color:white;">
+    {% for zabieg in zabiegi %}
+    <div style="margin:10px">
+        <b>Data zabiegu:</b>
+        {{zabieg.data_zabiegu}}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.zab %}
+        {% else %}
+        <br><b>Wyleczony ząb:</b>
+        {{zabieg.zab}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        <br><b>Opis zabiegu:</b>
+        <br>
+        {{zabieg.opis_zabiegu}}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.kod_uslugi_ICD10 %}
+        {% else %}
+        <br><b>Kod usługi ICD10:</b>
+        {{zabieg.kod_uslugi_ICD10}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.kod_procedury_ICD9 %}
+        {% else %}
+        <br><b>Kod procedury ICD9:</b>
+        {{zabieg.kod_procedury_ICD9}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.ilosc %}
+        {% else %}
+        <br><b>Ilość wyleczonych zębów:</b>
+        {{zabieg.ilosc}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.mat_kolor %}
+        <hr>
+        {% else %}
+        <br><b>Rodzaj i kolor użytych materiałów:</b>
+        {{zabieg.mat_kolor}}
+        <hr>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Wystawione recepty</b></h1><hr>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<div class="option" onclick="location.href='{{ url_for('addPrescription', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Dodawanie nowej recepty
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+<hr>
+<div style="background-color:white;">
+    {% for recepta in recepty %}
+    <div style="margin:10px">
+        {% if not recepta.nr_recepty %}
+        <b>Numer recepty:</b>
+        {% else %}
+        <b>Numer recepty:</b>
+        {{recepta.nr_recepty}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        <br><b>Oddział NFZ:</b>
+        {% if recepta.oddz_NFZ=="1" or recepta.oddz_NFZ=="2" or recepta.oddz_NFZ=="3" 
+        or recepta.oddz_NFZ=="4" or recepta.oddz_NFZ=="5" or recepta.oddz_NFZ=="6" 
+        or recepta.oddz_NFZ=="7" or recepta.oddz_NFZ=="8" or recepta.oddz_NFZ=="9" %}
+        0{{recepta.oddz_NFZ}}
+        {% else %}
+        {{recepta.oddz_NFZ}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not recepta.upraw_dod %}
+        <br><b>Uprawnienia dodatkowe pacjenta:</b>
+        {% else %}
+        <br><b>Uprawnienia dodatkowe pacjenta:</b>
+        {{recepta.upraw_dod}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not recepta.odplatnosc %}
+        <br><b>Odpłatność:</b>
+        {% else %}
+        <br><b>Odpłatność:</b>
+        {{recepta.odplatnosc}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        <br><b>Wypisane leki:</b>
+        <br>
+        {{recepta.przep_leki}}
+    </div>
+    <div style="margin:10px">
+        <br><b>Data wystawienia recepty:</b>
+        {{recepta.data_wyst}}
+    </div>
+    <div style="margin:10px">
+        {% if recepta.data_realiz=="0000-00-00" or not recepta.data_realiz %}
+        <br><b>Data realizacji recepty:</b>
+        {% else %}
+        <br><b>Data realizacji recepty:</b>
+        {{recepta.data_realiz}}
+        {% endif %}
+    </div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('modifyPrescription', recepta_id=recepta.recepta_id, osoba_id=osoba.osoba_id) }}">Edytuj</a>
+    <hr><br>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Dodawanie adresu zamieszkania</legend>
+                <div class="form-group">
+                    {{ form.wojewodztwo.label(class="form-control-label") }}
+                    {% if form.wojewodztwo.errors %}
+                        {{ form.wojewodztwo(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.wojewodztwo.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.wojewodztwo(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.gmina.label(class="form-control-label") }}
+                    {% if form.gmina.errors %}
+                        {{ form.gmina(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.gmina.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.gmina(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.miejscowosc.label(class="form-control-label") }}
+                    {% if form.miejscowosc.errors %}
+                        {{ form.miejscowosc(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.miejscowosc.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.miejscowosc(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.ulica.label(class="form-control-label") }}
+                    {% if form.ulica.errors %}
+                        {{ form.ulica(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ulica.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ulica(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.nr_domu.label(class="form-control-label") }}
+                    {% if form.nr_domu.errors %}
+                        {{ form.nr_domu(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.nr_domu.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.nr_domu(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.nr_lokalu.label(class="form-control-label") }}
+                    {% if form.nr_lokalu.errors %}
+                        {{ form.nr_lokalu(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.nr_lokalu.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.nr_lokalu(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.kod_poczt.label(class="form-control-label") }}
+                    {% if form.kod_poczt.errors %}
+                        {{ form.kod_poczt(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.kod_poczt.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.kod_poczt(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('manageHomeAddress', osoba_id=current_user.osoba_id)}}">Anuluj</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

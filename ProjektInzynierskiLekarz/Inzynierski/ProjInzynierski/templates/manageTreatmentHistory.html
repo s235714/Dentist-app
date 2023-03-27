@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Historia zabiegów pacjenta</b></h1><hr>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<div class="option" onclick="location.href='{{ url_for('addTreatment', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Dodawanie nowego zabiegu
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+<hr>
+<div style="background-color:white;">
+    {% for zabieg in zabiegi %}
+    <div style="margin:10px">
+        <b>Data zabiegu:</b>
+        {{zabieg.data_zabiegu}}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.zab %}
+        {% else %}
+        <br><b>Wyleczony ząb:</b>
+        {{zabieg.zab}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        <br><b>Opis zabiegu:</b>
+        <br>
+        {{zabieg.opis_zabiegu}}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.kod_uslugi_ICD10 %}
+        {% else %}
+        <br><b>Kod usługi ICD10:</b>
+        {{zabieg.kod_uslugi_ICD10}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.kod_procedury_ICD9 %}
+        {% else %}
+        <br><b>Kod procedury ICD9:</b>
+        {{zabieg.kod_procedury_ICD9}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.ilosc %}
+        {% else %}
+        <br><b>Ilość wyleczonych zębów:</b>
+        {{zabieg.ilosc}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not zabieg.mat_kolor %}
+        {% else %}
+        <br><b>Rodzaj i kolor użytych materiałów:</b>
+        {{zabieg.mat_kolor}}
+        {% endif %}
+    </div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('modifyTreatment', zabieg_id=zabieg.zabieg_id, osoba_id=osoba.osoba_id) }}">Edytuj</a>
+    <hr><br>
+    {% endfor %}
+</div>
+{% endblock content %}

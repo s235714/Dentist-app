@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<h1><b>Informacje o gabinecie</b></h1><hr>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Nazwa gabinetu:</b> {{gabinet.nazwa}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer REGON:</b> {{gabinet.regon}}
+    </div>
+     <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer NIP:</b> {{gabinet.nip}}
+    </div>
+</div>
+    {% if osoba.gabinetgabinet_id %}
+        <div class="option" onclick="location.href='modifyOffice'">
+            <div class="inside-text">
+                Edycja informacji o gabinecie
+            </div>
+        </div>
+        <div class="option" onclick="location.href='{{ url_for('accountDoctor') }}'">
+            <div class="inside-text">
+                Powrót do strony głównej lekarza
+            </div>
+        </div>
+        <br style="clear:both;">
+    {% else %}
+        <div class="option" onclick="location.href='addOffice'">
+            <div class="inside-text">
+                Dodawanie informacji o gabinecie
+            </div>
+        </div>
+        <div class="option" onclick="location.href='{{ url_for('accountDoctor') }}'">
+            <div class="inside-text">
+                Powrót do strony głównej lekarza
+            </div>
+        </div>
+        <br style="clear:both;">
+    {% endif %}
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <hr><br>
+        {% if gabinet.adresadres_id %}
+            {% if adresdogabinetu.nr_lokalu %}
+            <b>Adres gabinetu:</b> ul. {{adresdogabinetu.ulica}} {{adresdogabinetu.nr_domu}}/{{adresdogabinetu.nr_lokalu}}, {{adresdogabinetu.kod_poczt}} {{adresdogabinetu.miejscowosc}}
+            {% else %}
+            <b>Adres gabinetu:</b> ul. {{adresdogabinetu.ulica}} {{adresdogabinetu.nr_domu}}, {{adresdogabinetu.kod_poczt}} {{adresdogabinetu.miejscowosc}}
+            {% endif %}
+        {% else %}
+        <b>Adres gabinetu:</b> brak adresu
+        {% endif %}
+    </div>
+</div>
+    {% if gabinet.adresadres_id %}
+        <div class="option" onclick="location.href='modifyOfficeAddress'">
+            <div class="inside-text">
+                Edycja adresu gabinetu 
+            </div>
+        </div>
+        <br style="clear:both;">
+    {% else %}
+        <div class="option" onclick="location.href='addOfficeAddress'">
+            <div class="inside-text">
+                Dodawanie adresu gabinetu
+            </div>
+        </div>
+        <br style="clear:both;">
+    {% endif %}
+<div style="font-size: 24px; width:600px">
+    <hr><br>
+    {% if gabinet.telefontelefon_id %}
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefondogabinetu.telefon_kom1 %}
+    	{% else %}
+        <b>Telefon komórkowy do gabinetu:</b> {{telefondogabinetu.telefon_kom1}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefondogabinetu.telefon_stacj %}
+        {% else %}
+        <b>Telefon stacjonarny do gabinetu:</b> {{telefondogabinetu.telefon_stacj}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+     	{% if not telefondogabinetu.telefon_kom2 %}
+     	{% else %}
+        <b>Telefon komórkowy 2:</b> {{telefondogabinetu.telefon_kom2}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefondogabinetu.telefon_kom3 %}
+    	{% else %}
+        <b>Telefon komórkowy 3:</b> {{telefondogabinetu.telefon_kom3}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefondogabinetu.telefon_stacj2 %}
+    	{% else %}
+        <b>Telefon stacjonarny 2:</b> {{telefondogabinetu.telefon_stacj2}}
+        {% endif %}
+    </div>
+        <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefondogabinetu.telefon_zagr %}	
+        {% else %}
+        <b>Telefon zagraniczny:</b> {{telefondogabinetu.telefon_zagr}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefondogabinetu.telefon_zagr2 %}
+    	{% else %}
+        <b>Telefon zagraniczny 2:</b> {{telefondogabinetu.telefon_zagr2}}
+        {% endif %}
+    </div>
+    {% else %}
+    <b>Telefon do gabinetu: </b> brak telefonu
+    {% endif %}
+</div>
+    {% if gabinet.telefontelefon_id %}
+        <div class="option" onclick="location.href='modifyOfficeTelephone'">
+            <div class="inside-text">
+                Edycja telefonu do gabinetu 
+            </div>
+        </div>
+        <br style="clear:both;">
+    {% else %}
+        <div class="option" onclick="location.href='addOfficeTelephone'">
+            <div class="inside-text">
+                Dodawanie telefonu do gabinetu
+            </div>
+        </div>
+        <br style="clear:both;">
+    {% endif %}
+    <hr><br>
+{% endblock content %}

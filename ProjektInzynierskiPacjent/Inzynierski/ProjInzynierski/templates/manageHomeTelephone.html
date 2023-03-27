@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Telefon kontaktowy do pacjenta</b></h1><hr>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefon.telefon_kom1 %}
+    	{% else %}
+        <b>Telefon komórkowy:</b> {{telefon.telefon_kom1}}
+        {% endif %}
+    </div>
+     <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+     	{% if not telefon.telefon_kom2 %}
+     	{% else %}
+        <b>Telefon komórkowy 2:</b> {{telefon.telefon_kom2}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefon.telefon_kom3 %}
+    	{% else %}
+        <b>Telefon komórkowy 3:</b> {{telefon.telefon_kom3}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefon.telefon_stacj %}
+    	{% else %}
+        <b>Telefon stacjonarny:</b> {{telefon.telefon_stacj}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefon.telefon_stacj2 %}
+    	{% else %}
+        <b>Telefon stacjonarny 2:</b> {{telefon.telefon_stacj2}}
+        {% endif %}
+    </div>
+        <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_zagr %}	
+        {% else %}
+        <b>Telefon zagraniczny:</b> {{telefon.telefon_zagr}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+    	{% if not telefon.telefon_zagr2 %}
+    	{% else %}
+        <b>Telefon zagraniczny 2:</b> {{telefon.telefon_zagr2}}
+        {% endif %}
+    </div>
+</div>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<hr>
+{% if osoba.telefontelefon_id %}
+<div class="option" onclick="location.href='modifyHomeTelephone'">
+    <div class="inside-text">
+        Edycja telefonu kontaktowego
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient') }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+{% else %}
+<div class="option" onclick="location.href='addHomeTelephone'">
+    <div class="inside-text">
+        Dodawanie telefonu kontaktowego
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient') }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+{% endif %}
+{% endblock content %}

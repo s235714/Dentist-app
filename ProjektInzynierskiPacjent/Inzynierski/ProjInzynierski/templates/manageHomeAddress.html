@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Adres zamieszkania pacjenta</b></h1><hr>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Województwo:</b> {{adres.wojewodztwo}}
+    </div>
+     <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Gmina:</b> {{adres.gmina}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Miejscowość:</b> {{adres.miejscowosc}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Ulica:</b> {{adres.ulica}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer domu:</b> {{adres.nr_domu}}
+    </div>
+        <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer lokalu:</b> {{adres.nr_lokalu}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Kod pocztowy:</b> {{adres.kod_poczt}}
+    </div>
+</div>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<hr>
+{% if osoba.adresadres_id %}
+<div class="option" onclick="location.href='modifyHomeAddress'">
+    <div class="inside-text">
+        Edycja adresu zamieszkania
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient') }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+{% else %}
+<div class="option" onclick="location.href='addHomeAddress'">
+    <div class="inside-text">
+        Dodawanie adresu zamieszkania
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient') }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+{% endif %}
+{% endblock content %}

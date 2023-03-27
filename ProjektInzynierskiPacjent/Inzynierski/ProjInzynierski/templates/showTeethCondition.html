@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Stan uzębienia <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('accountPatient')}}">Powrót do strony głównej</a></b></h1><hr>
+<div style="background-color:white;">
+    {% for zeby in uzebienie %}
+    <div style="margin:10px">
+        {% if not zeby.zab %}
+        <b>Ząb/zęby:</b>
+        {% else %}
+        <b>Ząb/zęby:</b>
+        {{zeby.zab}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not zeby.stan_zeba %}    
+        <br><b>Stan zęba:</b>
+        {% else %}
+        <br><b>Stan zęba:</b>
+        {{zeby.stan_zeba}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if zeby.data_pocz=="0000-00-00" %}
+        <br><b>Data początkowa opisanego stanu:</b>
+        {% else %}
+        <br><b>Data początkowa opisanego stanu:</b>
+        {{zeby.data_pocz}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if zeby.data_kon=="0000-00-00" %}
+        <br><b>Data końcowa opisanego stanu:</b>
+        <hr>
+        {% else %}
+        <br><b>Data końcowa opisanego stanu:</b>
+        {{zeby.data_kon}}
+        <hr>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

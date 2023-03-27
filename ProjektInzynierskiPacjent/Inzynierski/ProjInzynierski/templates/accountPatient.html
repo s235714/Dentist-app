@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Dane osobowe pacjenta</b></h1><hr>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Imię:</b> {{pacjent.imie1}}
+    </div>
+     <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Drugie imię:</b> {{pacjent.imie2}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Nazwisko:</b> {{pacjent.nazwisko}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer PESEL:</b> {{pacjent.pesel}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if pacjent.data_ur=="0000-00-00" %}
+        <b>Data urodzenia:</b> 
+        {% else %}
+        <b>Data urodzenia:</b> {{pacjent.data_ur}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Płeć:</b> {{pacjent.plec}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Adres e-mail:</b> {{pacjent.email}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer karty pacjenta:</b> {{pacjent.pacjent.nr_karty}}
+    </div>   
+</div>
+{% endblock content %}

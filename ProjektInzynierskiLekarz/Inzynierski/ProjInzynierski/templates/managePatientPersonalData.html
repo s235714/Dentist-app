@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Dane osobowe pacjenta</b></h1><hr>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Imię:</b> {{pacjent.imie1}}
+    </div>
+     <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Drugie imię:</b> {{pacjent.imie2}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Nazwisko:</b> {{pacjent.nazwisko}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer PESEL:</b> {{pacjent.pesel}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if pacjent.data_ur=="0000-00-00" %}
+        <b>Data urodzenia:</b> 
+        {% else %}
+        <b>Data urodzenia:</b> {{pacjent.data_ur}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Płeć:</b> {{pacjent.plec}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Adres e-mail:</b> {{pacjent.email}}
+    </div>  
+</div>
+<br>
+<div class="option" onclick="location.href='{{ url_for('modifyPatientPersonalData', osoba_id=pacjent.osoba_id) }}'">
+    <div class="inside-text">
+        Edycja danych osobowych pacjenta
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient', osoba_id=pacjent.osoba_id) }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+<hr>
+<h1><b>Adres zamieszkania pacjenta</b></h1><br>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Województwo:</b> {{adres.wojewodztwo}}
+    </div>
+     <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Gmina:</b> {{adres.gmina}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Miejscowość:</b> {{adres.miejscowosc}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Ulica:</b> {{adres.ulica}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer domu:</b> {{adres.nr_domu}}
+    </div>
+        <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer lokalu:</b> {{adres.nr_lokalu}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Kod pocztowy:</b> {{adres.kod_poczt}}
+    </div>
+</div>
+<br>
+{% if pacjent.adresadres_id %}
+<div class="option" onclick="location.href='{{ url_for('modifyPatientAddress', osoba_id=pacjent.osoba_id) }}'">
+    <div class="inside-text">
+        Edycja adresu zamieszkania
+    </div>
+</div>
+<br style="clear:both;">
+{% else %}
+<div class="option" onclick="location.href='{{ url_for('addPatientAddress', osoba_id=pacjent.osoba_id) }}'">
+    <div class="inside-text">
+        Dodawanie adresu zamieszkania
+    </div>
+</div>
+<br style="clear:both;">
+{% endif %}
+<hr>
+<h1><b>Telefon kontaktowy do pacjenta</b></h1><br>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_kom1 %}
+        {% else %}
+        <b>Telefon komórkowy 1:</b> {{telefon.telefon_kom1}}
+        {% endif %}
+    </div>
+     <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_kom2 %}
+        {% else %}
+        <b>Telefon komórkowy 2:</b> {{telefon.telefon_kom2}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_kom3 %}
+        {% else %}
+        <b>Telefon komórkowy 3:</b> {{telefon.telefon_kom3}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_stacj %}
+        {% else %}
+        <b>Telefon stacjonarny 1:</b> {{telefon.telefon_stacj}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_stacj2 %}
+        {% else %}
+        <b>Telefon stacjonarny 2:</b> {{telefon.telefon_stacj2}}
+        {% endif %}
+    </div>
+        <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_zagr %}   
+        {% else %}
+        <b>Telefon zagraniczny 1:</b> {{telefon.telefon_zagr}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if not telefon.telefon_zagr2 %}
+        {% else %}
+        <b>Telefon zagraniczny 2:</b> {{telefon.telefon_zagr2}}
+        {% endif %}
+    </div>
+</div>
+{% if pacjent.telefontelefon_id %}
+<div class="option" onclick="location.href='{{ url_for('modifyPatientTelephone', osoba_id=pacjent.osoba_id) }}'">
+    <div class="inside-text">
+        Edycja telefonu do pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+{% else %}
+<div class="option" onclick="location.href='{{ url_for('addPatientTelephone', osoba_id=pacjent.osoba_id) }}'">
+    <div class="inside-text">
+        Dodawanie telefonu do pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+{% endif %}
+{% endblock content %}

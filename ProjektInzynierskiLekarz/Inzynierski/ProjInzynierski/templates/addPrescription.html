@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Dodawanie informacji o recepcie</legend>
+                <div class="form-group">
+                    {{ form.prescription_num.label(class="form-control-label") }}
+                    {% if form.prescription_num.errors %}
+                        {{ form.prescription_num(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.prescription_num.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.prescription_num(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.oddz_NFZ.label(class="form-control-label") }}
+                    {% if form.oddz_NFZ.errors %}
+                        {{ form.oddz_NFZ(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.oddz_NFZ.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.oddz_NFZ(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.upraw_dod.label(class="form-control-label") }}
+                    {% if form.upraw_dod.errors %}
+                        {{ form.upraw_dod(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.upraw_dod.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.upraw_dod(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.odplatnosc.label(class="form-control-label") }}
+                    {% if form.odplatnosc.errors %}
+                        {{ form.odplatnosc(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.odplatnosc.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.odplatnosc(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.przep_leki.label(class="form-control-label") }}
+                    {% if form.przep_leki.errors %}
+                        {{ form.przep_leki(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.przep_leki.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.przep_leki(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.data_wyst.label(class="form-control-label") }}
+                    {% if form.data_wyst.errors %}
+                        {{ form.data_wyst(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.data_wyst.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.data_wyst(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.data_realiz.label(class="form-control-label") }}
+                    {% if form.data_realiz.errors %}
+                        {{ form.data_realiz(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.data_realiz.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.data_realiz(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('managePrescriptions', osoba_id=osoba.osoba_id)}}">Anuluj</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

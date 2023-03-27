@@ -1,0 +1,27 @@
+CREATE TABLE adres (Adres_ID int(10) NOT NULL AUTO_INCREMENT, Wojewodztwo varchar(50), Gmina varchar(50), Miejscowosc varchar(60) NOT NULL, Ulica varchar(70), Nr_domu varchar(10) NOT NULL, Nr_lokalu varchar(10), Kod_poczt varchar(13) NOT NULL, PRIMARY KEY (Adres_ID));
+CREATE TABLE gabinet (Gabinet_ID int(10) NOT NULL AUTO_INCREMENT, Nazwa varchar(300) NOT NULL, REGON char(14), NIP char(13), AdresAdres_ID int(10), TelefonTelefon_ID int(10), PRIMARY KEY (Gabinet_ID));
+CREATE TABLE lekarz (Lekarz_ID int(10) NOT NULL AUTO_INCREMENT, Numer_licen varchar(20), Data_upr date, Specjalizacje varchar(250), OsobaOsoba_ID int(10) NOT NULL, PRIMARY KEY (Lekarz_ID));
+CREATE TABLE logowanie (Dane_log_ID int(10) NOT NULL AUTO_INCREMENT, Rodzaj_konta smallint(6) NOT NULL, Login varchar(50) NOT NULL, Haslo varchar(100) NOT NULL, OsobaOsoba_ID int(10) NOT NULL, PRIMARY KEY (Dane_log_ID));
+CREATE TABLE osoba (Osoba_ID int(10) NOT NULL AUTO_INCREMENT, Imie1 varchar(50) NOT NULL, Imie2 varchar(50), Nazwisko varchar(50) NOT NULL, PESEL char(11) NOT NULL, Data_ur date, Plec char(1) NOT NULL, Email varchar(50), AdresAdres_ID int(10), TelefonTelefon_ID int(10), gabinetGabinet_ID int(10), PRIMARY KEY (Osoba_ID), INDEX (Imie1), INDEX (Nazwisko), UNIQUE INDEX (PESEL));
+CREATE TABLE pacjent (Pacjent_ID int(10) NOT NULL AUTO_INCREMENT, Nr_karty char(10) NOT NULL, Higiena varchar(60), Zgryz varchar(80), Blona_sluzowa varchar(60), Uzup_protet text, Przyzebie text, Choroby text, Leki text, Uczulenia text, Czy_dziecko char(3), LekarzLekarz_ID int(10) NOT NULL, OsobaOsoba_ID int(10) NOT NULL, PRIMARY KEY (Pacjent_ID), UNIQUE INDEX (Nr_karty));
+CREATE TABLE recepta (Recepta_ID int(10) NOT NULL AUTO_INCREMENT, Nr_recepty varchar(22), Oddz_NFZ varchar(2) NOT NULL, Upraw_dod varchar(10), Odplatnosc varchar(10), Przep_leki text NOT NULL, Data_wyst date NOT NULL, Data_realiz date, LekarzLekarz_ID int(10) NOT NULL, ZabiegZabieg_ID int(10), PacjentPacjent_ID int(10) NOT NULL, GabinetGabinet_ID int(10), PRIMARY KEY (Recepta_ID), UNIQUE INDEX (Nr_recepty));
+CREATE TABLE telefon (Telefon_ID int(10) NOT NULL AUTO_INCREMENT, Czy_telefon smallint(6) NOT NULL, Telefon_kom1 varchar(10), Telefon_kom2 varchar(10), Telefon_kom3 varchar(10), Telefon_stacj varchar(10), Telefon_stacj2 varchar(10), Telefon_zagr varchar(19), Telefon_zagr2 varchar(19), PRIMARY KEY (Telefon_ID));
+CREATE TABLE uzebienie (Uzebienie_ID int(10) NOT NULL AUTO_INCREMENT, Zab varchar(20), Stan_zeba varchar(200), Data_pocz date, Data_kon date, PacjentPacjent_ID int(10) NOT NULL, PRIMARY KEY (Uzebienie_ID));
+CREATE TABLE zabieg (Zabieg_ID int(10) NOT NULL AUTO_INCREMENT, Data_zabiegu date NOT NULL, Zab varchar(20), Opis_zabiegu text NOT NULL, Kod_uslugi_ICD10 varchar(5), Kod_procedury_ICD9 varchar(3), Ilosc varchar(10), Mat_kolor varchar(400), LekarzLekarz_ID int(10) NOT NULL, PacjentPacjent_ID int(10) NOT NULL, PRIMARY KEY (Zabieg_ID));
+ALTER TABLE gabinet ADD CONSTRAINT `Adres gabinetu` FOREIGN KEY (AdresAdres_ID) REFERENCES adres (Adres_ID);
+ALTER TABLE osoba ADD CONSTRAINT `Adres osoby` FOREIGN KEY (AdresAdres_ID) REFERENCES adres (Adres_ID);
+ALTER TABLE lekarz ADD CONSTRAINT `Dane lekarza` FOREIGN KEY (OsobaOsoba_ID) REFERENCES osoba (Osoba_ID);
+ALTER TABLE logowanie ADD CONSTRAINT `Dane logowania` FOREIGN KEY (OsobaOsoba_ID) REFERENCES osoba (Osoba_ID);
+ALTER TABLE pacjent ADD CONSTRAINT `Dane wrazliwe pacjenta` FOREIGN KEY (OsobaOsoba_ID) REFERENCES osoba (Osoba_ID);
+ALTER TABLE recepta ADD CONSTRAINT `Do konkretnego zabiegu` FOREIGN KEY (ZabiegZabieg_ID) REFERENCES zabieg (Zabieg_ID);
+ALTER TABLE pacjent ADD CONSTRAINT `Ma pacjentow` FOREIGN KEY (LekarzLekarz_ID) REFERENCES lekarz (Lekarz_ID);
+ALTER TABLE recepta ADD CONSTRAINT `Otrzymuje recepte` FOREIGN KEY (PacjentPacjent_ID) REFERENCES pacjent (Pacjent_ID);
+ALTER TABLE zabieg ADD CONSTRAINT `Przechodzi zabieg` FOREIGN KEY (PacjentPacjent_ID) REFERENCES pacjent (Pacjent_ID);
+ALTER TABLE zabieg ADD CONSTRAINT `Przeprowadza zabieg` FOREIGN KEY (LekarzLekarz_ID) REFERENCES lekarz (Lekarz_ID);
+ALTER TABLE osoba ADD CONSTRAINT `Przypisana do gabinetu` FOREIGN KEY (gabinetGabinet_ID) REFERENCES gabinet (Gabinet_ID);
+ALTER TABLE uzebienie ADD CONSTRAINT `Stan uzebienia` FOREIGN KEY (PacjentPacjent_ID) REFERENCES pacjent (Pacjent_ID);
+ALTER TABLE gabinet ADD CONSTRAINT `Telefon do gabinetu` FOREIGN KEY (TelefonTelefon_ID) REFERENCES telefon (Telefon_ID);
+ALTER TABLE osoba ADD CONSTRAINT `Telefon do osoby` FOREIGN KEY (TelefonTelefon_ID) REFERENCES telefon (Telefon_ID);
+ALTER TABLE recepta ADD CONSTRAINT `Wystawia recepte` FOREIGN KEY (LekarzLekarz_ID) REFERENCES lekarz (Lekarz_ID);
+ALTER TABLE recepta ADD CONSTRAINT `Wystawiona w gabinecie` FOREIGN KEY (GabinetGabinet_ID) REFERENCES gabinet (Gabinet_ID);
+

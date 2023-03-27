@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Informacje o lekarzu prowadzącym </b></h1><hr>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Imię i nazwisko:</b> {{dane_lekarza.imie1}} {{dane_lekarza.nazwisko}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Adres e-mail:</b> {{dane_lekarza.email}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer licencji lekarza:</b> {{doktor.numer_licen}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if doktor.data_upr=="0000-00-00" %}
+        <b>Data uzyskania uprawnień:</b> 
+        {% else %}
+        <b>Data uzyskania uprawnień:</b> {{doktor.data_upr}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Specjalizacje:</b> {{doktor.specjalizacje}}
+    </div> 
+</div>
+<hr>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<div class="option" onclick="location.href='{{ url_for('accountPatient') }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+{% endblock content %}

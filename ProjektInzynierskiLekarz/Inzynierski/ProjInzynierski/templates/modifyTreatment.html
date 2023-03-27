@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Edycja informacji o zabiegu</legend>
+                <div class="form-group">
+                    {{ form.data_zabiegu.label(class="form-control-label") }}
+                    {% if form.data_zabiegu.errors %}
+                        {{ form.data_zabiegu(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.data_zabiegu.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.data_zabiegu(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.zab.label(class="form-control-label") }}
+                    {% if form.zab.errors %}
+                        {{ form.zab(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.zab.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.zab(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.opis_zabiegu.label(class="form-control-label") }}
+                    {% if form.opis_zabiegu.errors %}
+                        {{ form.opis_zabiegu(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.opis_zabiegu.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.opis_zabiegu(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.kod_uslugi_ICD10.label(class="form-control-label") }}
+                    {% if form.kod_uslugi_ICD10.errors %}
+                        {{ form.kod_uslugi_ICD10(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.kod_uslugi_ICD10.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.kod_uslugi_ICD10(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.kod_procedury_ICD9.label(class="form-control-label") }}
+                    {% if form.kod_procedury_ICD9.errors %}
+                        {{ form.kod_procedury_ICD9(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.kod_procedury_ICD9.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.kod_procedury_ICD9(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.ilosc.label(class="form-control-label") }}
+                    {% if form.ilosc.errors %}
+                        {{ form.ilosc(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ilosc.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ilosc(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.mat_kolor.label(class="form-control-label") }}
+                    {% if form.mat_kolor.errors %}
+                        {{ form.mat_kolor(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.mat_kolor.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.mat_kolor(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('manageTreatmentHistory', osoba_id=osoba.osoba_id)}}">Anuluj</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

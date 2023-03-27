@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Informacje o lekarzu prowadzącym</b></h1><hr>
+<div style="font-size: 24px; width:600px">
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Numer licencji lekarza:</b> {{lekarz.numer_licen}}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        {% if lekarz.data_upr=="0000-00-00" %}
+        <b>Data uzyskania uprawnień:</b> 
+        {% else %}
+        <b>Data uzyskania uprawnień:</b> {{lekarz.data_upr}}
+        {% endif %}
+    </div>
+    <div style="background-color: white;padding-bottom:10px;padding-top:10px">
+        <b>Specjalizacje:</b> {{lekarz.specjalizacje}}
+    </div> 
+</div>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<hr>
+{% if lekarz.osobaosoba_id %}
+<div class="option" onclick="location.href='modifyDoctor'">
+    <div class="inside-text">
+        Edycja informacji o lekarzu
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountDoctor') }}'">
+    <div class="inside-text">
+        Powrót do strony głównej lekarza
+    </div>
+</div>
+<br style="clear:both;">
+{% else %}
+<div class="option" onclick="location.href='addDoctor'">
+    <div class="inside-text">
+        Dodawanie informacji o lekarzu
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountDoctor') }}'">
+    <div class="inside-text">
+        Powrót do strony głównej lekarza
+    </div>
+</div>
+<br style="clear:both;">
+{% endif %}
+{% endblock content %}

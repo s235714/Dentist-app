@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Wystawione recepty <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('accountPatient')}}">Powrót do strony głównej</a></b></h1><hr>
+<div style="background-color:white;">
+    {% for recepta in recepty %}
+    <div style="margin:10px">
+        {% if not recepta.nr_recepty %}
+        <b>Numer recepty:</b>
+        {% else %}
+        <b>Numer recepty:</b>
+        {{recepta.nr_recepty}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        <br><b>Oddział NFZ:</b>
+        {% if recepta.oddz_NFZ < 10 %}
+        0{{recepta.oddz_NFZ}}
+        {% else %}
+        {{recepta.oddz_NFZ}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not recepta.upraw_dod %}
+        <br><b>Uprawnienia dodatkowe pacjenta:</b>
+        {% else %}
+        <br><b>Uprawnienia dodatkowe pacjenta:</b>
+        {{recepta.upraw_dod}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not recepta.odplatnosc %}
+        <br><b>Odpłatność:</b>
+        {% else %}
+        <br><b>Odpłatność:</b>
+        {{recepta.odplatnosc}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        <br><b>Wypisane leki:</b>
+        <br>
+        {{recepta.przep_leki}}
+    </div>
+    <div style="margin:10px">
+        <br><b>Data wystawienia recepty:</b>
+        {{recepta.data_wyst}}
+    </div>
+    <div style="margin:10px">
+        {% if recepta.data_realiz=="0000-00-00" %}
+        <br><b>Data realizacji recepty:</b>
+        <hr>
+        {% else %}
+        <br><b>Data realizacji recepty:</b>
+        {{recepta.data_realiz}}
+        <hr>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

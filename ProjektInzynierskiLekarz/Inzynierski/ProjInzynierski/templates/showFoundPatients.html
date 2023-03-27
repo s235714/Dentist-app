@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    .accordion-toggle
+    {
+    cursor: pointer;
+    }
+    .hiddenRow
+    {
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+    font-size: 13px;
+    }
+    .hiddenRow:hover
+    {
+    }
+</style>
+<div style="margin:15px">
+</div>
+<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('findPatient')}}">Wyszukaj ponownie</a><br>
+<table class="table table-hover">
+  <thead class="bg-steel" style="width: 100%; color:white">
+    <tr>
+      <th scope="col">Imię</th>
+      <th scope="col">Nazwisko</th>
+      <th scope="col">Numer PESEL</th>
+      <th scope="col">Data urodzenia</th>
+      <th scope="col">Adres e-mail</th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+{% for pacjent in pacjenci %}
+  <tbody>
+    <tr data-toggle="collapse" data-target="#{{pacjent.osoba_id}}" class="accordion-toggle">
+      <td>{{pacjent.imie1}}</td>
+      <td>{{pacjent.nazwisko}}</td>
+      <td>{{pacjent.pesel}}</td>
+      {% if pacjent.data_ur=="0000-00-00" %}
+      <td><i> Brak danych </i></td>
+      {% else %}
+        <td>{{pacjent.data_ur}}</td>
+      {% endif %}
+      {% if not pacjent.email %}
+      <td><i> Brak danych </i></td>
+      {% else %}
+        <td>{{pacjent.email}}</td>
+      {% endif %}        
+      <td>  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('accountPatient', osoba_id=pacjent.osoba_id) }}">Wybierz</a></td>
+    </tr>
+  </tbody>
+{% endfor %}
+</table>
+{% endblock content %}

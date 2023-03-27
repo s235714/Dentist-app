@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Stan uzębienia pacjenta</b></h1><hr>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+<div class="option" onclick="location.href='{{ url_for('addTeethCondition', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Dodawanie informacji o stanie zęba
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+<br style="clear:both;">
+<hr>
+<div style="background-color:white;">
+    {% for uzebienie in uzebienie %}
+    <div style="margin:10px">
+        {% if not uzebienie.zab %}
+        <b>Ząb/zęby:</b>
+        {% else %}
+        <b>Ząb/zęby:</b>
+        {{uzebienie.zab}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not uzebienie.stan_zeba %}    
+        <br><b>Stan zęba:</b>
+        {% else %}
+        <br><b>Stan zęba:</b>
+        {{uzebienie.stan_zeba}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if uzebienie.data_pocz=="0000-00-00" or not uzebienie.data_pocz %}
+        <br><b>Data początkowa opisanego stanu:</b>
+        {% else %}
+        <br><b>Data początkowa opisanego stanu:</b>
+        {{uzebienie.data_pocz}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if uzebienie.data_kon=="0000-00-00" or not uzebienie.data_kon %}
+        <br><b>Data końcowa opisanego stanu:</b>
+        {% else %}
+        <br><b>Data końcowa opisanego stanu:</b>
+        {{uzebienie.data_kon}}
+        {% endif %}
+    </div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('modifyTeethCondition', uzebienie_id=uzebienie.uzebienie_id, osoba_id=osoba.osoba_id) }}">Edytuj</a>
+    <hr><br>
+    {% endfor %}
+</div>
+{% endblock content %}

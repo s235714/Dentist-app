@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1><b>Stan zdrowia i jamy ustnej</b></h1><hr>
+<style>
+    .option
+    {
+        margin:10px;
+        border-style: solid;
+        border-width: : 10px;
+        border-color: lightblue;
+        border-radius:10px;
+        background-color: white;
+        cursor: pointer;
+        vertical-align:middle;
+        text-align: center;
+        width:40%;
+        height: 90px;
+        top:50%;
+        float: left;
+    }
+    .option:hover
+    {
+        border-color: black;
+    }
+    .inside-text
+    {
+        margin-top:30px;
+    }
+</style>
+{% if stanzdrowia.osobaosoba_id %}
+<div class="option" onclick="location.href='{{ url_for('modifyHealthCondition', pacjent_id=stanzdrowia.pacjent_id, osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Edycja informacji o stanie zdrowia
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+{% else %}
+<div class="option" onclick="location.href='{{ url_for('addHealthCondition', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Dodawanie informacji o stanie zdrowia
+    </div>
+</div>
+<div class="option" onclick="location.href='{{ url_for('accountPatient', osoba_id=osoba.osoba_id) }}'">
+    <div class="inside-text">
+        Powrót do strony głównej pacjenta
+    </div>
+</div>
+{% endif %}
+<br style="clear:both;">
+<hr>
+<div style="background-color:white;">
+    <div style="margin:10px">
+        {% if not stanzdrowia.nr_karty %}
+        <b>Numer karty pacjenta:</b>
+        {% else %}
+        <b>Numer karty pacjenta:</b>
+        {{stanzdrowia.nr_karty}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.higiena %}
+        <br><b>Higiena:</b>
+        {% else %}
+        <br><b>Higiena:</b>
+        {{stanzdrowia.higiena}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.zgryz %}
+        <br><b>Zgryz:</b>
+        {% else %}
+        <br><b>Zgryz:</b>
+        {{stanzdrowia.zgryz}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.blona_sluzowa %}
+        <br><b>Błona śluzowa:</b>
+        {% else %}
+        <br><b>Błona śluzowa:</b>
+        {{stanzdrowia.blona_sluzowa}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.uzup_protet %}
+        <br><b>Uzupełnienia protetyczne:</b>
+        {% else %}
+        <br><b>Uzupełnienia protetyczne:</b>
+        <br>
+        {{stanzdrowia.uzup_protet}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.przyzebie %}
+        <br><b>Przyzębie:</b>
+        {% else %}
+        <br><b>Przyzębie:</b>
+        <br>
+        {{stanzdrowia.przyzebie}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.choroby %}
+        <br><b>Choroby ogólnoustrojowe:</b>
+        {% else %}
+        <br><b>Choroby ogólnoustrojowe:</b>
+        <br>
+        {{stanzdrowia.choroby}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.leki %}
+        <br><b>Zażywane leki:</b>
+        {% else %}
+        <br><b>Zażywane leki:</b>
+        <br>
+        {{stanzdrowia.leki}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.uczulenia %}
+        <br><b>Uczulenia:</b>
+        {% else %}
+        <br><b>Uczulenia:</b>
+        <br>
+        {{stanzdrowia.uczulenia}}
+        {% endif %}
+    </div>
+    <div style="margin:10px">
+        {% if not stanzdrowia.czy_dziecko %}
+        <br><b>Czy osoba jest dzieckiem (poniżej 18. roku życia):</b>
+        <hr>
+        {% else %}
+        <br><b>Czy osoba jest dzieckiem (poniżej 18. roku życia):</b>
+        {{stanzdrowia.czy_dziecko}}
+        <hr>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
